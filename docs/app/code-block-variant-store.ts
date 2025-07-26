@@ -35,6 +35,6 @@ export function useSelectedVariant(group: string) {
       return () => listeners.delete(cb);
     },
     () => getSelectedVariant(group),
-    () => getSelectedVariant(group)
+    () => "" // Return empty string during SSR to prevent hydration mismatch
   );
 }

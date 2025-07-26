@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, Copy } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Highlight, themes } from "prism-react-renderer";
 
 import { cn } from "@/lib/utils";
@@ -63,7 +63,12 @@ function CodeBlockInternal({
   const [copied, setCopied] = useState(false);
   const [copiedSection, setCopiedSection] = useState<number>();
   const [hoveredSection, setHoveredSection] = useState<number>();
+  const [mounted, setMounted] = useState(false);
   const { resolvedTheme: theme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Copy all code to clipboard, excludes removed lines
   const copyToClipboard = async () => {
@@ -114,7 +119,7 @@ function CodeBlockInternal({
     setTimeout(() => setCopiedSection(undefined), 2000);
   };
 
-  const prismTheme = theme === "light" ? themes.github : themes.vsDark;
+  const prismTheme = mounted && theme === "light" ? themes.github : themes.vsDark;
 
   const getLanguage = (lang: string) => {
     const languageMap: Record<string, string> = {
@@ -131,7 +136,7 @@ function CodeBlockInternal({
     <div
       className={cn(
         "relative my-4 rounded-lg border overflow-hidden",
-        theme === "light" ? "bg-white" : "bg-zinc-950",
+        mounted && theme === "light" ? "bg-white" : "bg-zinc-950",
         className
       )}
     >
@@ -150,7 +155,7 @@ function CodeBlockInternal({
         <div
           className={cn(
             "flex items-center gap-2 text-xs",
-            theme === "light" ? "text-zinc-700" : "text-zinc-200"
+            mounted && theme === "light" ? "text-zinc-700" : "text-zinc-200"
           )}
         >
           {["tsx", "ts", "typescript"].includes(language) && (
@@ -243,11 +248,11 @@ function CodeBlockInternal({
                         isDecorated && "-mx-4 px-4",
                         isHighlighted && "bg-foreground/10 border-primary",
                         isAdded &&
-                          (theme === "light"
+                          (mounted && theme === "light"
                             ? "bg-green-200"
                             : "bg-green-400/20"),
                         isRemoved &&
-                          (theme === "light" ? "bg-red-200" : "bg-red-400/20")
+                          (mounted && theme === "light" ? "bg-red-200" : "bg-red-400/20")
                       )}
                       onMouseEnter={() =>
                         section && setHoveredSection(section.start)
@@ -258,7 +263,7 @@ function CodeBlockInternal({
                         <span
                           className={cn(
                             "text-green-600 select-none absolute left-1",
-                            theme === "dark" && "text-green-300"
+                            mounted && theme === "dark" && "text-green-300"
                           )}
                         >
                           +
@@ -268,7 +273,7 @@ function CodeBlockInternal({
                         <span
                           className={cn(
                             "text-red-600 select-none absolute left-1",
-                            theme === "dark" && "text-red-300"
+                            mounted && theme === "dark" && "text-red-300"
                           )}
                         >
                           -
@@ -321,6 +326,11 @@ export function CodeBlock(props: CodeBlockProps) {
     removedLines = [],
   } = props;
   const globalSelected = useSelectedVariant(variantGroup);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   let variantSelector: React.ReactNode = null;
   let active: {
@@ -334,7 +344,8 @@ export function CodeBlock(props: CodeBlockProps) {
 
   if (variants && variants.length > 0) {
     const availableLabels = variants.map((v) => v.id);
-    const selectedIndex = availableLabels.indexOf(globalSelected);
+    // Use the first variant during SSR, then hydrate with the selected one
+    const selectedIndex = mounted ? availableLabels.indexOf(globalSelected) : -1;
     const actualIndex = selectedIndex >= 0 ? selectedIndex : 0;
     active = variants[actualIndex] || variants[0];
     if (variants.length > 0) {

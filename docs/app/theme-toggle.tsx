@@ -1,10 +1,16 @@
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useSidebar, SidebarMenuButton } from "@/components/ui/sidebar";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const { state } = useSidebar();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const cycleTheme = () => {
     if (!theme) {
@@ -15,6 +21,35 @@ export function ThemeToggle() {
     const nextIndex = (currentIndex + 1) % themes.length;
     setTheme(themes[nextIndex]);
   };
+
+  if (!mounted) {
+    // Render a neutral state during SSR to prevent hydration mismatch
+    if (state === "collapsed") {
+      return (
+        <SidebarMenuButton
+          tooltip="Theme"
+          aria-label="Toggle theme"
+          className="text-muted-foreground"
+        >
+          <Sun className="size-4" />
+        </SidebarMenuButton>
+      );
+    }
+    
+    return (
+      <div className="flex gap-1">
+        <button className="flex h-7 w-7 items-center justify-center rounded-[4px] transition-colors text-muted-foreground">
+          <Sun className="size-4" />
+        </button>
+        <button className="flex h-7 w-7 items-center justify-center rounded-[4px] transition-colors text-muted-foreground">
+          <Moon className="size-4" />
+        </button>
+        <button className="flex h-7 w-7 items-center justify-center rounded-[4px] transition-colors text-muted-foreground">
+          <Monitor className="size-4" />
+        </button>
+      </div>
+    );
+  }
 
   const currentIcon = {
     light: <Sun className="size-4" />,
