@@ -135,12 +135,7 @@ export function InstallationGuide({ className }: InstallationGuideProps) {
               </div>
             </div>
             
-            <button
-              onClick={() => setIsDismissed(true)}
-              className="text-muted-foreground hover:text-foreground transition-colors p-1"
-            >
-              <X className="size-4" />
-            </button>
+
           </div>
           
           <div className="pb-3 border-t border-border/50">
