@@ -4,6 +4,7 @@ import type * as React from "react";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import DocsSidebar from "@/app/docs-sidebar";
+import { NotificationProvider } from "@/app/content/shared/components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function Layout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-sidebar`}
       >
         <ThemeProvider enableSystem attribute="class">
+          <NotificationProvider />
           <DocsSidebar>{children}</DocsSidebar>
         </ThemeProvider>
       </body>

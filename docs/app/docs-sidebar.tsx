@@ -1,7 +1,23 @@
 "use client";
 
 import type * as React from "react";
-import { Github, AlertTriangle, PanelLeft } from "lucide-react";
+import { 
+  Github, 
+  AlertTriangle, 
+  PanelLeft, 
+  Home, 
+  BookOpen, 
+  Play, 
+  Rocket, 
+  Shield, 
+  Layers, 
+  FileText, 
+  Users, 
+  ArrowRight,
+  Code,
+  Terminal,
+  Globe
+} from "lucide-react";
 import VersionSelector from "./version-selector";
 import Link from "next/link";
 import Image from "next/image";
@@ -162,34 +178,26 @@ export default function DocsSidebar({ children }: React.PropsWithChildren) {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <Link href="#">
-                      <span className="text-base font-semibold">Home</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton
-                    asChild
-                    className="text-yellow-600 dark:text-yellow-400"
-                  >
-                    <Link href="#alpha-status">
-                      <AlertTriangle className="size-4" />
-                      <span>Alpha Status</span>
+                    <Link href="/introduction">
+                      <Home className="size-4" />
+                      <span className="text-base font-semibold">Introduction</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#what-is-this">
+                    <Link href="/introduction#what-is-this">
+                      <BookOpen className="size-4" />
                       <span>What is this?</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#examples">
+                    <Link href="/introduction#examples">
+                      <Play className="size-4" />
                       <span>Examples</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
@@ -201,59 +209,66 @@ export default function DocsSidebar({ children }: React.PropsWithChildren) {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#getting-started">
+                    <Link href="/installation#getting-started">
+                      <Rocket className="size-4" />
                       <span className="text-base font-semibold">
-                        Getting Started
+                        Installation
                       </span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#prerequisites">Prerequisites</a>
+                    <Link href="/installation#prerequisites">
+                      <Shield className="size-4" />
+                      <span>Prerequisites</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#installation">Installation</a>
+                    <Link href="/installation#installation">
+                      <Terminal className="size-4" />
+                      <span>Installation Steps</span>
+                    </Link>
                   </SidebarMenuButton>
                   <SidebarMenuSub>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#install-component">Install component</a>
+                        <Link href="/installation#install-component">Install component</Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#set-environment-variables">
+                        <Link href="/installation#set-environment-variables">
                           Environment variables
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#better-auth-instance">
+                        <Link href="/installation#better-auth-instance">
                           Initialize Better Auth
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#create-better-auth-client">
+                        <Link href="/installation#create-better-auth-client">
                           Better Auth client
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#mount-handlers">Mount handlers</a>
+                        <Link href="/installation#mount-handlers">Mount handlers</Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#setup-convex-client">
+                        <Link href="/installation#setup-convex-client">
                           Convex client provider
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>
@@ -267,52 +282,62 @@ export default function DocsSidebar({ children }: React.PropsWithChildren) {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#basic-usage">
+                    <Link href="/usage#basic-usage">
+                      <Code className="size-4" />
                       <span className="text-base font-semibold">
                         Basic Usage
                       </span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#basic-usage-signing-in">Signing in</a>
+                    <Link href="/usage#basic-usage-signing-in">
+                      <Users className="size-4" />
+                      <span>Signing in</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#basic-usage-authorization">Authorization</a>
+                    <Link href="/usage#basic-usage-authorization">
+                      <Shield className="size-4" />
+                      <span>Authorization</span>
+                    </Link>
                   </SidebarMenuButton>
                   <SidebarMenuSub>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#basic-usage-authorization-react">React</a>
+                        <Link href="/usage#basic-usage-authorization-react">React</Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#basic-usage-authorization-convex-functions">
+                        <Link href="/usage#basic-usage-authorization-convex-functions">
                           Convex Functions
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#basic-usage-authorization-framework-server">
+                        <Link href="/usage#basic-usage-authorization-framework-server">
                           Framework server
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#basic-usage-server-side">Server side</a>
+                    <Link href="/usage#basic-usage-server-side">
+                      <Terminal className="size-4" />
+                      <span>Server side</span>
+                    </Link>
                   </SidebarMenuButton>
                   <SidebarMenuSub>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#using-auth-api">Using auth.api</a>
+                        <Link href="/usage#using-auth-api">Using auth.api</Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>
@@ -326,16 +351,20 @@ export default function DocsSidebar({ children }: React.PropsWithChildren) {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#integrations">
+                    <Link href="/integrations#integrations">
+                      <Layers className="size-4" />
                       <span className="text-base font-semibold">
                         Integrations
                       </span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                   <SidebarMenuSub>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#integrations-hono">Hono</a>
+                        <Link href="/integrations#integrations-hono">
+                          <Globe className="size-3" />
+                          <span>Hono</span>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>
@@ -349,50 +378,64 @@ export default function DocsSidebar({ children }: React.PropsWithChildren) {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#guides">
+                    <Link href="/guides#guides">
+                      <FileText className="size-4" />
                       <span className="text-base font-semibold">Guides</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#guides-users-table">Users table</a>
+                    <Link href="/guides#guides-users-table">
+                      <Users className="size-4" />
+                      <span>Users table</span>
+                    </Link>
                   </SidebarMenuButton>
                   <SidebarMenuSub>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#guides-user-creation">User creation</a>
+                        <Link href="/guides#guides-user-creation">User creation</Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                     <SidebarMenuSubItem>
                       <SidebarMenuSubButton asChild>
-                        <a href="#guides-indexing-on-metadata">
+                        <Link href="/guides#guides-indexing-on-metadata">
                           Indexing on metadata
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#migrating-existing-users">
-                      Migrating existing users
-                    </a>
+                    <Link href="/guides#migrating-existing-users">
+                      <ArrowRight className="size-4" />
+                      <span>Migrating existing users</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#migrate-0-6-to-0-7">Migrate 0.6 &rarr; 0.7</a>
+                    <Link href="/guides#migrate-0-6-to-0-7">
+                      <ArrowRight className="size-4" />
+                      <span>Migrate 0.6 &rarr; 0.7</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#migrate-0-5-to-0-6">Migrate 0.5 &rarr; 0.6</a>
+                    <Link href="/guides#migrate-0-5-to-0-6">
+                      <ArrowRight className="size-4" />
+                      <span>Migrate 0.5 &rarr; 0.6</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <a href="#migrate-0-4-to-0-5">Migrate 0.4 &rarr; 0.5</a>
+                    <Link href="/guides#migrate-0-4-to-0-5">
+                      <ArrowRight className="size-4" />
+                      <span>Migrate 0.4 &rarr; 0.5</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
